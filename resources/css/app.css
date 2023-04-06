@@ -1,0 +1,11 @@
+@import "./fonts.css";
+@import "./base.css";
+@import "./components.css";
+
+@import "@iconscout/unicons/css/solid.css";
+@import "@iconscout/unicons/css/line.css";
+@import "@iconscout/unicons/css/line.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

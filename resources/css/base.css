@@ -1,0 +1,15 @@
+@layer base {
+
+    body {
+        @apply text-[0.975rem] text-dark font-poppins font-light antialiased;
+    }
+
+    .uil {
+        @apply text-2xl;
+    }
+
+    a, button {
+        @apply transition-all duration-300;
+    }
+
+}

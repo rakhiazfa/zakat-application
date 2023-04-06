@@ -1,0 +1,169 @@
+@layer components {
+
+    .wrapper {
+        @apply w-full lg:max-w-[1280px] 2xl:max-w-[1560px] 
+        mx-auto px-5 md:px-12;
+    }
+
+    .field {
+        @apply w-full relative;
+    }
+
+    .label {
+        @apply block text-xs font-medium text-gray-500 mb-1 ml-1;
+    }
+
+    .control {
+        @apply block w-full outline-none border text-[0.825rem]  
+        placeholder:text-xs rounded-md px-3 py-2 disabled:bg-gray-100 
+        read-only:bg-gray-50;
+    }
+    .control.rounded {
+        @apply rounded-full px-4;
+    }
+
+    .invalid-field {
+        @apply text-[0.7rem] text-red-500 font-normal mt-1 ml-1 -mb-1;
+    }
+
+    .button {
+        @apply flex justify-center items-center 
+        text-[0.825rem] font-medium rounded-md px-6 py-2;
+    }
+    .button.sm {
+        @apply text-xs;
+    }
+
+    .card {
+        @apply w-full bg-white rounded-md shadow-sxs p-3;
+    }
+    .card .card-title {
+        @apply text-sm font-medium;
+    }
+    .card .card-title.sm {
+        @apply text-xs;
+    }
+
+    .alert {
+        @apply relative flex items-center gap-3 text-[0.8rem] 
+        font-normal rounded-lg px-4 py-[0.625rem];
+    }
+    .alert .icon {
+        @apply text-xl text-inherit;
+    }
+    .alert.success {
+        @apply border-2 border-emerald-300 
+        bg-emerald-100 text-emerald-600;
+    }
+    .alert.error {
+        @apply border-2 border-red-400 
+        bg-red-100 text-red-600;
+    }
+    .alert.warning {
+        @apply border-2 border-yellow-500 
+        bg-yellow-100 text-yellow-600;
+    }
+    .alert.info {
+        @apply border-2 border-cyan-400 
+        bg-cyan-100 text-cyan-600;
+    }
+    .alert .close-alert {
+        @apply absolute top-[50%] right-3 
+        transform translate-y-[-50%] cursor-pointer 
+        text-lg pointer-events-auto;
+    }
+
+    .modal {
+        @apply fixed top-0 inset-0 z-[15000] bg-[rgba(0,0,0,0.75)] 
+        hidden px-6 sm:px-8 md:px-12 overflow-auto;
+    }
+    .modal.show {
+        @apply flex;
+    }
+    .modal .modal-content-wrapper {
+        @apply relative w-full h-max grid place-items-center py-10;
+    }
+    .modal .modal-content {
+        animation-name: modal-show;
+        animation-duration: 0.4s;
+    
+        @apply w-[90%] sm:w-[450px] 
+        bg-white rounded-md shadow-md;
+    }
+    .modal.modal-lg .modal-content {
+        animation-name: modal-show;
+        animation-duration: 0.4s;
+    
+        @apply w-[90%] sm:w-[550px] 
+        bg-white rounded-md shadow-md;
+    }
+    .modal.modal-xl .modal-content {
+        animation-name: modal-show;
+        animation-duration: 0.4s;
+    
+        @apply w-[90%] sm:w-[650px] 
+        bg-white rounded-md shadow-md;
+    }
+    .modal .modal-content .header {
+        @apply font-medium border-b p-5;
+    }
+    .modal .modal-content .body {
+        @apply text-sm border-b p-5;
+    }
+    .modal .modal-content .footer {
+        @apply text-sm px-5 py-3;
+    }
+
+    .table-responsive {
+        @apply w-full overflow-auto whitespace-nowrap;
+    }
+    .table {
+        @apply w-full rounded-sm overflow-hidden 
+        whitespace-nowrap xl:whitespace-normal;
+    }
+    .table thead {
+        @apply bg-gray-100 uppercase;
+    }
+    .table tfoot {
+        @apply bg-gray-100 uppercase;
+    }
+    .table thead th {
+        @apply text-xs md:text-[0.8rem] 
+        text-gray-500 font-medium py-5;
+    }
+    .table th {
+        @apply text-gray-600 font-medium;
+    }
+    .table th,
+    .table td {
+        @apply text-left text-xs md:text-sm px-8 py-4;
+    }
+    .table .table-actions {
+        @apply flex items-center gap-7;
+    }
+    .table .table-actions .uil,
+    .table .table-actions .uis {
+        @apply text-[1.2rem] text-gray-500;
+    }
+    .table.table-bordered th,
+    .table.table-bordered td {
+        @apply border border-gray-100;
+    }
+    .table.table-bordered-b th,
+    .table.table-bordered-b td {
+        @apply border-b border-gray-100;
+    }
+    .table.table-sm th,
+    .table.table-sm td {
+        @apply text-xs px-6 py-[0.875rem];
+    }
+
+}
+
+@keyframes modal-show {
+    0% {
+        opacity: 0;
+    } 100% {
+        opacity: 1;
+    }
+}
