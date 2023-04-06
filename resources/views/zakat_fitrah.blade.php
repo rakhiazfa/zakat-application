@@ -72,42 +72,39 @@
                                                         <h4>Rincian Zakat Fitrah</h4>
                                                     </div>
                                                     <div class="body">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-sm table-bordered">
-                                                                <tr>
-                                                                    <th>Tanggal</th>
-                                                                    <td>: {{ $item->tanggal }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Nama Muzaki</th>
-                                                                    <td>: {{ $item->nama_muzaki }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Alamat</th>
-                                                                    <td>: {{ $item->alamat ?? '-' }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Jumlah Jiwa</th>
-                                                                    <td>: {{ $item->jumlah_jiwa }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Jumlah Zakat Fitrah ( Rp. )</th>
-                                                                    <td>:
-                                                                        {{ 'Rp. ' . number_format($item->nominal_zakat_fitrah) }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Jumlah Fidyah ( Rp. )</th>
-                                                                    <td>:
-                                                                        {{ 'Rp. ' . number_format($item->nominal_fidyah) }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Total ( Rp. )</th>
-                                                                    <td>: {{ 'Rp. ' . number_format($item->total) }}
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
+                                                        <div class="mb-5">
+                                                            <label class="label">Tanggal</label>
+                                                            <span class="ml-1">{{ $item->tanggal }}</span>
+                                                        </div>
+                                                        <div class="mb-5">
+                                                            <label class="label">Nama Muzaki</label>
+                                                            <span class="ml-1">{{ $item->nama_muzaki }}</span>
+                                                        </div>
+                                                        <div class="mb-5">
+                                                            <label class="label">Alamat</label>
+                                                            <span class="ml-1">{{ $item->alamat ?? '-' }}</span>
+                                                        </div>
+                                                        <div class="mb-5">
+                                                            <label class="label">Jumlah Jiwa</label>
+                                                            <span class="ml-1">{{ $item->jumlah_jiwa }}</span>
+                                                        </div>
+                                                        <div class="mb-5">
+                                                            <label class="label">Jumlah Zakat Fitrah ( Rp. )</label>
+                                                            <span class="ml-1">
+                                                                {{ 'Rp. ' . number_format($item->nominal_zakat_fitrah) }}
+                                                            </span>
+                                                        </div>
+                                                        <div class="mb-5">
+                                                            <label class="label">Jumlah Fidyah ( Rp. )</label>
+                                                            <span class="ml-1">
+                                                                {{ 'Rp. ' . number_format($item->nominal_fidyah) }}
+                                                            </span>
+                                                        </div>
+                                                        <div class="mb-5">
+                                                            <label class="label">Total ( Rp. )</label>
+                                                            <span
+                                                                class="ml-1">{{ 'Rp. ' . number_format($item->total) }}
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <div class="footer flex justify-end gap-x-5">

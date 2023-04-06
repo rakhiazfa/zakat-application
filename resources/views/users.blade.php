@@ -47,21 +47,21 @@
                             <div class="body">
                                 <div class="table-responsive">
                                     <table class="table table-sm table-bordered">
-                                        <tr>
-                                            <th>Nama</th>
-                                            <td>: {{ $user->name }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Email</th>
-                                            <td>: {{ $user->email }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Username</th>
-                                            <td>: {{ $user->username }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Role</th>
-                                            <td>
+                                        <div class="mb-5">
+                                            <label class="label">Nama</label>
+                                            <span class="ml-1">: {{ $user->name }}</span>
+                                        </div>
+                                        <div class="mb-5">
+                                            <label class="label">Email</label>
+                                            <span class="ml-1">: {{ $user->email }}</span>
+                                        </div>
+                                        <div class="mb-5">
+                                            <label class="label">Username</label>
+                                            <span class="ml-1">: {{ $user->username }}</span>
+                                        </div>
+                                        <div class="mb-5">
+                                            <label class="label">Role</label>
+                                            <div class="ml-1">
                                                 <div class="flex flex-wrap gap-1">
                                                     @foreach ($user->roles ?? [] as $role)
                                                         <span
@@ -70,8 +70,8 @@
                                                         </span>
                                                     @endforeach
                                                 </div>
-                                            </td>
-                                        </tr>
+                                            </div>
+                                        </div>
                                     </table>
                                 </div>
                             </div>

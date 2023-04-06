@@ -75,7 +75,7 @@
 
     .modal {
         @apply fixed top-0 inset-0 z-[15000] bg-[rgba(0,0,0,0.75)] 
-        hidden px-6 sm:px-8 md:px-12 overflow-auto;
+        hidden overflow-auto;
     }
     .modal.show {
         @apply flex;
@@ -87,21 +87,21 @@
         animation-name: modal-show;
         animation-duration: 0.4s;
     
-        @apply w-[90%] sm:w-[450px] 
+        @apply w-[95%] sm:w-[450px] 
         bg-white rounded-md shadow-md;
     }
     .modal.modal-lg .modal-content {
         animation-name: modal-show;
         animation-duration: 0.4s;
     
-        @apply w-[90%] sm:w-[550px] 
+        @apply w-[95%] sm:w-[550px] 
         bg-white rounded-md shadow-md;
     }
     .modal.modal-xl .modal-content {
         animation-name: modal-show;
         animation-duration: 0.4s;
     
-        @apply w-[90%] sm:w-[650px] 
+        @apply w-[95%] sm:w-[650px] 
         bg-white rounded-md shadow-md;
     }
     .modal .modal-content .header {

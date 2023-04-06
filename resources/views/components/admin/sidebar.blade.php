@@ -24,13 +24,6 @@
             <li class="menu-title">Applications</li>
 
             <li>
-                <a class="sidebar-link {{ request()->routeIs('users*') ? 'active' : '' }}" href="{{ route('users') }}">
-                    <i class="uil uil-user"></i>
-                    <span> Users </span>
-                </a>
-            </li>
-
-            <li>
                 <a class="sidebar-link {{ request()->routeIs('zakat_fitrah*') ? 'active' : '' }}"
                     href="{{ route('zakat_fitrah') }}">
                     <i class="uil uil-invoice"></i>
@@ -43,6 +36,13 @@
                     href="{{ route('zakat_maal') }}">
                     <i class="uil uil-invoice"></i>
                     <span> Zakat Maal </span>
+                </a>
+            </li>
+
+            <li>
+                <a class="sidebar-link {{ request()->routeIs('users*') ? 'active' : '' }}" href="{{ route('users') }}">
+                    <i class="uil uil-user"></i>
+                    <span> Users </span>
                 </a>
             </li>
 
