@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+
+    return redirect()->route('auth.signin');
+});
+
 Route::name('dashboard')->middleware('auth:web', 'preventBackHistory')->group(base_path('routes/web/dashboard.php'));
 
 Route::name('profile')->middleware('auth:web')->group(base_path('routes/web/profile.php'));
