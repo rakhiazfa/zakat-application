@@ -12,9 +12,11 @@ class ZakatMaalController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $zakatMaal = ZakatMaal::all();
+        $user = $request->user();
+
+        $zakatMaal = $user->hasRole('Amil Zakat') ? $user->zakatMaal : ZakatMaal::all();
 
         return view('zakat_maal')->with('zakatMaal', $zakatMaal);
     }

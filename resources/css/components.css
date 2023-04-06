@@ -148,7 +148,7 @@
     }
     .table.table-bordered th,
     .table.table-bordered td {
-        @apply border border-gray-100;
+        @apply border border-gray-200;
     }
     .table.table-bordered-b th,
     .table.table-bordered-b td {
@@ -161,6 +161,10 @@
     .table.table-xs th,
     .table.table-xs td {
         @apply text-[0.7rem] px-3 py-[0.8rem];
+    }
+    .table.table-xxs th,
+    .table.table-xxs td {
+        @apply text-[0.575rem] px-3 py-[0.75rem];
     }
 
 }

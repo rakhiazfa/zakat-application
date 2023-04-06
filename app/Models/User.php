@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -56,5 +57,50 @@ class User extends Authenticatable
     public function getAvatarLinkAttribute(): string
     {
         return $this->avatar ? url('storage/' . $this->avatar) : url('assets/images/avatars/default.png');
+    }
+
+    public function zakatFitrah(): HasMany
+    {
+        return $this->hasMany(ZakatFitrah::class, 'user_id', 'id');
+    }
+
+    public function zakatMaal(): HasMany
+    {
+        return $this->hasMany(ZakatMaal::class, 'user_id', 'id');
+    }
+
+    public function totalKK()
+    {
+        return $this->zakatFitrah->count();
+    }
+
+    public function totalJiwa()
+    {
+        return $this->zakatFitrah->sum('jumlah_jiwa');
+    }
+
+    public function totalZakatFitrah()
+    {
+        return $this->zakatFitrah->sum('nominal_zakat_fitrah');
+    }
+
+    public function totalFidyah()
+    {
+        return $this->zakatFitrah->sum('nominal_fidyah');
+    }
+
+    public function totalZakatMaal()
+    {
+        return $this->zakatMaal->sum('nominal_zakat_maal');
+    }
+
+    public function totalInfaqShedekah()
+    {
+        return $this->zakatMaal->sum('nominal_infaq_shedekah');
+    }
+
+    public function totalKeseluruhan()
+    {
+        return $this->totalZakatFitrah() + $this->totalZakatMaal() + $this->totalInfaqShedekah() + $this->totalFidyah();
     }
 }

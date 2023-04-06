@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\ZakatFitrah;
+use App\Models\ZakatMaal;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -13,9 +15,25 @@ class DashboardController extends Controller
         $userCount = User::count();
         $onlineUserCount = User::where('is_online', true)->count();
 
+        $jumlahKK = ZakatFitrah::count();
+
+        $totalZakatFitrah = ZakatFitrah::sum('total');
+        $totalZakatMaalInfakShedekah = ZakatMaal::sum('total');
+
+        $totalUang = $totalZakatFitrah + $totalZakatMaalInfakShedekah;
+
+        // 
+
+        $amilZakat = User::whereHas('roles', function ($query) {
+            $query->where('name', '!=', 'Super Admin');
+        })->with('roles')->get();
+
         return view('dashboard')->with([
             'userCount' => $userCount,
             'onlineUserCount' => $onlineUserCount,
+            'jumlahKK' => $jumlahKK,
+            'totalUang' => $totalUang,
+            'amilZakat' => $amilZakat,
         ]);
     }
 }

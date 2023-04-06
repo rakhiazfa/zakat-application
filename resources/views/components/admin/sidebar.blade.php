@@ -39,12 +39,14 @@
                 </a>
             </li>
 
-            <li>
-                <a class="sidebar-link {{ request()->routeIs('users*') ? 'active' : '' }}" href="{{ route('users') }}">
-                    <i class="uil uil-user"></i>
-                    <span> Users </span>
-                </a>
-            </li>
+            @role('Super Admin')
+                <li>
+                    <a class="sidebar-link {{ request()->routeIs('users*') ? 'active' : '' }}" href="{{ route('users') }}">
+                        <i class="uil uil-user"></i>
+                        <span> Users </span>
+                    </a>
+                </li>
+            @endrole
 
             <li class="menu-title">Preferences</li>
 

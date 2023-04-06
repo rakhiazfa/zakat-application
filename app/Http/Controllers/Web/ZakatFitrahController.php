@@ -13,9 +13,11 @@ class ZakatFitrahController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $zakatFitrah = ZakatFitrah::all();
+        $user = $request->user();
+
+        $zakatFitrah = $user->hasRole('Amil Zakat') ? $user->zakatFitrah : ZakatFitrah::all();
 
         return view('zakat_fitrah')->with('zakatFitrah', $zakatFitrah);
     }
