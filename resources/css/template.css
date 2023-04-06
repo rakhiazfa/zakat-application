@@ -12,7 +12,7 @@
     @apply mb-7;
 }
 .admin-wrapper .section .title {
-    @apply text-xl font-semibold mb-5;
+    @apply text-sm xs:text-base sm:text-xl font-semibold mb-5;
 }
 
 /* Sidebar */

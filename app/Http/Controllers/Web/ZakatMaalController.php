@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\ZakatMaal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ZakatMaalController extends Controller
 {
@@ -12,7 +14,9 @@ class ZakatMaalController extends Controller
      */
     public function index()
     {
-        return view('zakat_maal');
+        $zakatMaal = ZakatMaal::all();
+
+        return view('zakat_maal')->with('zakatMaal', $zakatMaal);
     }
 
     /**
@@ -20,7 +24,7 @@ class ZakatMaalController extends Controller
      */
     public function create()
     {
-        //
+        return view('zakat_maal.create');
     }
 
     /**
@@ -28,38 +32,68 @@ class ZakatMaalController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'nama_muzaki' => ['required'],
+            'alamat' => ['nullable'],
+            'jenis_harta' => ['nullable'],
+            'nominal_zakat_maal' => ['nullable', 'numeric'],
+            'nominal_infaq_shedekah' => ['nullable', 'numeric'],
+            'keterangan' => ['nullable'],
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        $total = (int) $request->input('nominal_zakat_maal') + (int) $request->input('nominal_infaq_shedekah');
+
+        $request->merge([
+            'total' => $total,
+            'user_id' => Auth::id(),
+        ]);
+
+        ZakatMaal::create($request->all());
+
+        return redirect()->route('zakat_maal')->with('success', 'Berhasil menambahkan zakat maal / infaq / shedekah.');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(ZakatMaal $zakatMaal)
     {
-        //
+        return view('zakat_maal.edit')->with('zakatMaal', $zakatMaal);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, ZakatMaal $zakatMaal)
     {
-        //
+        $request->validate([
+            'nama_muzaki' => ['required'],
+            'alamat' => ['nullable'],
+            'jenis_harta' => ['nullable'],
+            'nominal_zakat_maal' => ['nullable', 'numeric'],
+            'nominal_infaq_shedekah' => ['nullable', 'numeric'],
+            'keterangan' => ['nullable'],
+        ]);
+
+        $total = (int) $request->input('nominal_zakat_maal') + (int) $request->input('nominal_infaq_shedekah');
+
+        $request->merge([
+            'total' => $total,
+            'user_id' => Auth::id(),
+        ]);
+
+        $zakatMaal->update($request->all());
+
+        return redirect()->route('zakat_maal')->with('success', 'Berhasil memperbarui zakat maal / infaq / shedekah.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(ZakatMaal $zakatMaal)
     {
-        //
+        $zakatMaal->delete();
+
+        return redirect()->route('zakat_maal')->with('success', 'Berhasil menghapus zakat maal / infaq / shedekah.');
     }
 }

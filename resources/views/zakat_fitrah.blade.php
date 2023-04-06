@@ -25,13 +25,13 @@
                 <table class="table table-sm">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Tanggal</th>
-                            <th>Nama Muzaki</th>
-                            <th>Alamat</th>
-                            <th>Jumlah Jiwa</th>
-                            <th>Total</th>
-                            <th>#</th>
+                            <th class="border">No</th>
+                            <th class="border">Tanggal</th>
+                            <th class="border">Nama Muzaki</th>
+                            <th class="border">Alamat</th>
+                            <th class="border">Jumlah Jiwa</th>
+                            <th class="border">Total</th>
+                            <th class="border">#</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,9 +45,10 @@
                                 <td>Rp. {{ number_format($item->total) }}</td>
                                 <td>
                                     <div class="flex items-center gap-5">
+
                                         <button type="button"
                                             class="w-[30px] sm:w-[35px] aspect-square grid place-items-center rounded-md bg-blue-500 hover:bg-blue-600 text-white modal-trigger"
-                                            data-target="#mobileRincianZakatFitrah-{{ $loop->iteration }}">
+                                            data-target="#rincianZakatFitrah-{{ $loop->iteration }}">
                                             <i
                                                 class="text-[1rem] sm:text-[1.15rem] pointer-events-none uil uil-eye"></i>
                                         </button>
@@ -60,12 +61,12 @@
 
                                         <button type="button"
                                             class="w-[30px] sm:w-[35px] aspect-square grid place-items-center rounded-md bg-blue-500 hover:bg-blue-600 text-white modal-trigger"
-                                            data-target="#mobileHapusZakatFitrahModal-{{ $loop->iteration }}">
+                                            data-target="#hapusZakatFitrahModal-{{ $loop->iteration }}">
                                             <i
                                                 class="text-[1rem] sm:text-[1.15rem] pointer-events-none uil uil-trash-alt"></i>
                                         </button>
 
-                                        <div class="modal" id="mobileRincianZakatFitrah-{{ $loop->iteration }}">
+                                        <div class="modal" id="rincianZakatFitrah-{{ $loop->iteration }}">
                                             <div class="modal-content-wrapper">
                                                 <div class="modal-content">
                                                     <div class="header">
@@ -118,12 +119,13 @@
                                         </div>
 
                                         <form action="{{ route('zakat_fitrah.destroy', ['zakatFitrah' => $item]) }}"
-                                            method="POST" id="hapusZakatFitrahForm-{{ $loop->iteration }}">
+                                            method="POST" id="mobileHapusZakatFitrahForm-{{ $loop->iteration }}"
+                                            class="hidden">
                                             @csrf
                                             @method('DELETE')
                                         </form>
 
-                                        <div class="modal" id="mobileHapusZakatFitrahModal-{{ $loop->iteration }}">
+                                        <div class="modal" id="hapusZakatFitrahModal-{{ $loop->iteration }}">
                                             <div class="modal-content-wrapper">
                                                 <div class="modal-content">
                                                     <div class="header">
@@ -136,7 +138,7 @@
                                                         </button>
                                                         <button type="button"
                                                             class="button sm border border-red-500 bg-red-50 hover:bg-red-100 text-red-600 form-trigger"
-                                                            data-target="#hapusZakatFitrahForm-{{ $loop->iteration }}">
+                                                            data-target="#mobileHapusZakatFitrahForm-{{ $loop->iteration }}">
                                                             Hapus
                                                         </button>
                                                     </div>
@@ -187,15 +189,26 @@
                         </div>
 
                         <div>
-                            <label class="label">Total Zakat</label>
+                            <label class="label">Zakat Fitrah ( Rp. )</label>
+                            <span class="ml-1">{{ 'Rp. ' . number_format($item->nominal_zakat_fitrah) }}</span>
+                        </div>
+
+                        <div>
+                            <label class="label">Fidyah ( Rp. )</label>
+                            <span class="ml-1">{{ 'Rp. ' . number_format($item->nominal_fidyah) }}</span>
+                        </div>
+
+                        <div>
+                            <label class="label">Total</label>
                             <span class="ml-1">{{ 'Rp. ' . number_format($item->total) }}</span>
                         </div>
                     </div>
 
                     <div class="flex justify-end items-center gap-5">
+
                         <button type="button"
                             class="w-[30px] sm:w-[35px] aspect-square grid place-items-center rounded-md bg-blue-500 hover:bg-blue-600 text-white modal-trigger"
-                            data-target="#rincianZakatFitrah-{{ $loop->iteration }}">
+                            data-target="#mobileRincianZakatFitrah-{{ $loop->iteration }}">
                             <i class="text-[1rem] sm:text-[1.15rem] pointer-events-none uil uil-eye"></i>
                         </button>
 
@@ -206,11 +219,11 @@
 
                         <button type="button"
                             class="w-[30px] sm:w-[35px] aspect-square grid place-items-center rounded-md bg-blue-500 hover:bg-blue-600 text-white modal-trigger"
-                            data-target="#hapusZakatFitrahModal-{{ $loop->iteration }}">
+                            data-target="#mobileHapusZakatFitrahModal-{{ $loop->iteration }}">
                             <i class="text-[1rem] sm:text-[1.15rem] pointer-events-none uil uil-trash-alt"></i>
                         </button>
 
-                        <div class="modal" id="rincianZakatFitrah-{{ $loop->iteration }}">
+                        <div class="modal" id="mobileRincianZakatFitrah-{{ $loop->iteration }}">
                             <div class="modal-content-wrapper">
                                 <div class="modal-content">
                                     <div class="header">
@@ -262,12 +275,12 @@
                         </div>
 
                         <form action="{{ route('zakat_fitrah.destroy', ['zakatFitrah' => $item]) }}" method="POST"
-                            id="mobileHapusZakatFitrahForm-{{ $loop->iteration }}" class="hidden">
+                            id="hapusZakatFitrahForm-{{ $loop->iteration }}">
                             @csrf
                             @method('DELETE')
                         </form>
 
-                        <div class="modal" id="hapusZakatFitrahModal-{{ $loop->iteration }}">
+                        <div class="modal" id="mobileHapusZakatFitrahModal-{{ $loop->iteration }}">
                             <div class="modal-content-wrapper">
                                 <div class="modal-content">
                                     <div class="header">
@@ -280,7 +293,7 @@
                                         </button>
                                         <button type="button"
                                             class="button sm border border-red-500 bg-red-50 hover:bg-red-100 text-red-600 form-trigger"
-                                            data-target="#mobileHapusZakatFitrahForm-{{ $loop->iteration }}">
+                                            data-target="#hapusZakatFitrahForm-{{ $loop->iteration }}">
                                             Hapus
                                         </button>
                                     </div>

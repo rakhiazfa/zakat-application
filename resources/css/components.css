@@ -28,7 +28,8 @@
 
     .button {
         @apply flex justify-center items-center 
-        text-[0.825rem] font-medium rounded-md px-6 py-2;
+        text-[0.7rem] xs:text-xs sm:text-[0.825rem] 
+        font-medium rounded-md px-6 py-2 whitespace-nowrap;
     }
     .button.sm {
         @apply text-xs;
@@ -45,7 +46,7 @@
     }
 
     .alert {
-        @apply relative flex items-center gap-3 text-[0.8rem] 
+        @apply relative flex items-center gap-3 text-[0.6rem] xs:text-[0.8rem] 
         font-normal rounded-lg px-4 py-[0.625rem];
     }
     .alert .icon {
@@ -156,6 +157,10 @@
     .table.table-sm th,
     .table.table-sm td {
         @apply text-xs px-6 py-[0.875rem];
+    }
+    .table.table-xs th,
+    .table.table-xs td {
+        @apply text-[0.7rem] px-3 py-[0.8rem];
     }
 
 }
