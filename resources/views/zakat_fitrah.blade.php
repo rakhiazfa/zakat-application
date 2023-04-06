@@ -47,7 +47,7 @@
                                     <div class="flex items-center gap-5">
                                         <button type="button"
                                             class="w-[30px] sm:w-[35px] aspect-square grid place-items-center rounded-md bg-blue-500 hover:bg-blue-600 text-white modal-trigger"
-                                            data-target="#rincianZakatFitrah-{{ $loop->iteration }}">
+                                            data-target="#mobileRincianZakatFitrah-{{ $loop->iteration }}">
                                             <i
                                                 class="text-[1rem] sm:text-[1.15rem] pointer-events-none uil uil-eye"></i>
                                         </button>
@@ -60,12 +60,12 @@
 
                                         <button type="button"
                                             class="w-[30px] sm:w-[35px] aspect-square grid place-items-center rounded-md bg-blue-500 hover:bg-blue-600 text-white modal-trigger"
-                                            data-target="#hapusZakatFitrahModal-{{ $loop->iteration }}">
+                                            data-target="#mobileHapusZakatFitrahModal-{{ $loop->iteration }}">
                                             <i
                                                 class="text-[1rem] sm:text-[1.15rem] pointer-events-none uil uil-trash-alt"></i>
                                         </button>
 
-                                        <div class="modal" id="rincianZakatFitrah-{{ $loop->iteration }}">
+                                        <div class="modal" id="mobileRincianZakatFitrah-{{ $loop->iteration }}">
                                             <div class="modal-content-wrapper">
                                                 <div class="modal-content">
                                                     <div class="header">
@@ -123,7 +123,7 @@
                                             @method('DELETE')
                                         </form>
 
-                                        <div class="modal" id="hapusZakatFitrahModal-{{ $loop->iteration }}">
+                                        <div class="modal" id="mobileHapusZakatFitrahModal-{{ $loop->iteration }}">
                                             <div class="modal-content-wrapper">
                                                 <div class="modal-content">
                                                     <div class="header">
@@ -262,7 +262,7 @@
                         </div>
 
                         <form action="{{ route('zakat_fitrah.destroy', ['zakatFitrah' => $item]) }}" method="POST"
-                            id="hapusZakatFitrahForm-{{ $loop->iteration }}" class="hidden">
+                            id="mobileHapusZakatFitrahForm-{{ $loop->iteration }}" class="hidden">
                             @csrf
                             @method('DELETE')
                         </form>
@@ -280,7 +280,7 @@
                                         </button>
                                         <button type="button"
                                             class="button sm border border-red-500 bg-red-50 hover:bg-red-100 text-red-600 form-trigger"
-                                            data-target="#hapusZakatFitrahForm-{{ $loop->iteration }}">
+                                            data-target="#mobileHapusZakatFitrahForm-{{ $loop->iteration }}">
                                             Hapus
                                         </button>
                                     </div>
