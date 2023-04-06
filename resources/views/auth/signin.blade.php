@@ -8,7 +8,7 @@
 
             <div class="min-h-screen grid place-items-center">
 
-                <div class="py-10">
+                <div class="py-10 px-5">
 
                     <h4 class="text-2xl font-semibold mb-3">Sign In</h4>
                     <p class="text-sm text-gray-500 form-normal mb-7">
@@ -22,7 +22,7 @@
                         </div>
                     @endif
 
-                    <form class="w-[400px]" method="POST">
+                    <form method="POST">
                         @csrf
 
                         <div class="grid gap-7">
