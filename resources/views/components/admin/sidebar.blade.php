@@ -41,6 +41,14 @@
 
             @role('Super Admin')
                 <li>
+                    <a class="sidebar-link {{ request()->routeIs('pembagian*') ? 'active' : '' }}"
+                        href="{{ route('pembagian') }}">
+                        <i class="uil uil-share"></i>
+                        <span> Pembagian </span>
+                    </a>
+                </li>
+
+                <li>
                     <a class="sidebar-link {{ request()->routeIs('users*') ? 'active' : '' }}" href="{{ route('users') }}">
                         <i class="uil uil-user"></i>
                         <span> Users </span>

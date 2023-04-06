@@ -70,26 +70,26 @@
                 <table class="table table-xxs table-bordered">
                     <thead>
                         <tr>
-                            <th class="border" rowspan="2" style="text-align: center;">RT</th>
-                            <th class="border" rowspan="2" style="text-align: center;">No</th>
-                            <th class="border" colspan="2" style="text-align: center;">Banyak Muzaki</th>
-                            <th class="border" colspan="2" style="text-align: center;">Zakat Fitrah</th>
-                            <th class="border" colspan="2" style="text-align: center;">Zakat Maal</th>
-                            <th class="border" colspan="2" style="text-align: center;">Infaq / Shodaqoh</th>
-                            <th class="border" colspan="2" style="text-align: center;">Fidyah</th>
-                            <th class="border" rowspan="2" style="text-align: center;">Total</th>
+                            <th rowspan="2" style="text-align: center;">RT</th>
+                            <th rowspan="2" style="text-align: center;">No</th>
+                            <th colspan="2" style="text-align: center;">Banyak Muzaki</th>
+                            <th colspan="2" style="text-align: center;">Zakat Fitrah</th>
+                            <th colspan="2" style="text-align: center;">Zakat Maal</th>
+                            <th colspan="2" style="text-align: center;">Infaq / Shodaqoh</th>
+                            <th colspan="2" style="text-align: center;">Fidyah</th>
+                            <th rowspan="2" style="text-align: center;">Total</th>
                         </tr>
                         <tr>
-                            <th class="border">KK</th>
-                            <th class="border">Jiwa ( Orang )</th>
-                            <th class="border">Beras ( KG )</th>
-                            <th class="border">Uang ( Rp. )</th>
-                            <th class="border">Jenis Barang</th>
-                            <th class="border">Uang ( Rp. )</th>
-                            <th class="border">Beras ( KG )</th>
-                            <th class="border">Uang ( Rp. )</th>
-                            <th class="border">Jenis Barang</th>
-                            <th class="border">Uang ( Rp. )</th>
+                            <th>KK</th>
+                            <th>Jiwa ( Orang )</th>
+                            <th>Beras ( KG )</th>
+                            <th>Uang ( Rp. )</th>
+                            <th>Jenis Barang</th>
+                            <th>Uang ( Rp. )</th>
+                            <th>Beras ( KG )</th>
+                            <th>Uang ( Rp. )</th>
+                            <th>Jenis Barang</th>
+                            <th>Uang ( Rp. )</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -134,6 +134,40 @@
                         <th colspan="2" style="text-align: right;">
                             {{ 'Rp. ' . number_format($totalKeseluruhanFidyah) }}</th>
                         <th>{{ 'Rp. ' . number_format($totalKeseluruhan) }}</th>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div class="card mb-5">
+            <div class="table-responsive">
+                <table class="table table-xs table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Jenis Penerima</th>
+                            <th>Total Uang</th>
+                            <th>Persentase ( % )</th>
+                            <th>Hasil ( Rp. )</th>
+                            <th>Jumlah Penerima</th>
+                            <th>Hasil ( Rp. )</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($pembagian as $item)
+                            <tr>
+                                <th>{{ $item->jenis_penerima }}</th>
+                                <td>{{ 'Rp. ' . number_format($totalKeseluruhan) }}</td>
+                                <td>{{ $item->persentase . ' %' }}</td>
+                                <td>{{ 'Rp. ' . number_format($item->inputTotalUang($totalKeseluruhan)) }}</td>
+                                <td>{{ $item->jumlah_penerima }}</td>
+                                <td>
+                                    {{ 'Rp. ' . number_format((float) $item->inputTotalUang($totalKeseluruhan) / (float) $item->jumlah_penerima) }}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+
                     </tfoot>
                 </table>
             </div>

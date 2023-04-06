@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pembagian;
 use App\Models\User;
 use App\Models\ZakatFitrah;
 use App\Models\ZakatMaal;
@@ -28,12 +29,17 @@ class DashboardController extends Controller
             $query->where('name', '!=', 'Super Admin');
         })->with('roles')->get();
 
+        // 
+
+        $pembagian = Pembagian::all();
+
         return view('dashboard')->with([
             'userCount' => $userCount,
             'onlineUserCount' => $onlineUserCount,
             'jumlahKK' => $jumlahKK,
             'totalUang' => $totalUang,
             'amilZakat' => $amilZakat,
+            'pembagian' => $pembagian,
         ]);
     }
 }
