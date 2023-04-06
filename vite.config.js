@@ -10,7 +10,7 @@ export default defineConfig({
                 "resources/css/template.css",
                 "resources/js/template.js",
                 "resources/js/pages/profile.js",
-                "resources/js/pages/zakat_fitrah/create.js",
+                "resources/js/pages/zakat_fitrah.js",
             ],
             refresh: true,
         }),

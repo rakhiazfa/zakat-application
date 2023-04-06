@@ -120,7 +120,7 @@
     </section>
 
     @section('scripts')
-        @vite('resources/js/zakat_fitrah/create.js')
+        @vite('resources/js/pages/zakat_fitrah.js')
     @endsection
 
 </x-admin.template>
