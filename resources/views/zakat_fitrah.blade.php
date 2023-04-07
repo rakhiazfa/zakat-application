@@ -22,7 +22,7 @@
 
         <div class="card hidden md:block">
             <div class="table-responsive">
-                <table class="table table-sm">
+                <table class="table table-xs table-bordered">
                     <thead>
                         <tr>
                             <th class="border">No</th>
@@ -30,7 +30,9 @@
                             <th class="border">Nama Muzaki</th>
                             <th class="border">Alamat</th>
                             <th class="border">Jumlah Jiwa</th>
-                            <th class="border">Total</th>
+                            <th class="border">Zakat Fitrah ( Rp. )</th>
+                            <th class="border">Fidyah ( Rp. )</th>
+                            <th class="border">Total ( Rp. )</th>
                             <th class="border">#</th>
                         </tr>
                     </thead>
@@ -42,6 +44,8 @@
                                 <th>{{ $item->nama_muzaki }}</th>
                                 <td>{{ $item->alamat ?? '-' }}</td>
                                 <td>{{ $item->jumlah_jiwa }}</td>
+                                <td>Rp. {{ number_format($item->nominal_zakat_fitrah) }}</td>
+                                <td>Rp. {{ number_format($item->nominal_fidyah) }}</td>
                                 <td>Rp. {{ number_format($item->total) }}</td>
                                 <td>
                                     <div class="flex items-center gap-5">
@@ -156,7 +160,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="5">TOTAL KESELURUHAN</th>
+                            <th colspan="7">TOTAL KESELURUHAN</th>
                             <th colspan="2">{{ 'Rp. ' . number_format($totalKeseluruhan) }}</th>
                         </tr>
                     </tfoot>
