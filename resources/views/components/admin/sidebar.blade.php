@@ -54,17 +54,17 @@
                         <span> Users </span>
                     </a>
                 </li>
+
+                <li class="menu-title">Preferences</li>
+
+                <li>
+                    <a class="sidebar-link {{ request()->routeIs('settings*') ? 'active' : '' }}"
+                        href="{{ route('settings') }}">
+                        <i class="uil uil-setting"></i>
+                        <span> Settings </span>
+                    </a>
+                </li>
             @endrole
-
-            <li class="menu-title">Preferences</li>
-
-            <li>
-                <a class="sidebar-link {{ request()->routeIs('settings*') ? 'active' : '' }}"
-                    href="{{ route('settings') }}">
-                    <i class="uil uil-setting"></i>
-                    <span> Settings </span>
-                </a>
-            </li>
 
         </ul>
     </nav>
