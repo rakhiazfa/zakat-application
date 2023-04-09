@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\ZakatFitrah;
 use App\Models\ZakatPerJiwa;
 use Illuminate\Http\Request;
@@ -27,9 +28,18 @@ class ZakatFitrahController extends Controller
      */
     public function create()
     {
-        $zakatPerJiwa = ZakatPerJiwa::first()->nominal;
+        $zakatPerJiwaUang = ZakatPerJiwa::where('key', 'uang')->first()->nominal ?? 0;
+        $zakatPerJiwaBeras = ZakatPerJiwa::where('key', 'beras')->first()->nominal ?? 0;
 
-        return view('zakat_fitrah.create')->with('zakatPerJiwa', $zakatPerJiwa);
+        $users = User::whereHas('roles', function ($query) {
+            $query->where('name', '!=', 'Super Admin');
+        })->with('roles')->get();
+
+        return view('zakat_fitrah.create')->with([
+            'zakatPerJiwaUang' => $zakatPerJiwaUang,
+            'zakatPerJiwaBeras' => $zakatPerJiwaBeras,
+            'users' => $users,
+        ]);
     }
 
     /**
@@ -37,25 +47,35 @@ class ZakatFitrahController extends Controller
      */
     public function store(Request $request)
     {
+        $user = $request->user();
+
+        if ($request->input('jenis_barang') == 'uang') {
+
+            $total = (float) $request->input('nominal_fidyah') + (float) $request->input('nominal_zakat_fitrah');
+
+            $request->merge([
+                'total_uang' => $total,
+                'user_id' => $user->hasRole('Super Admin') ? $request->input('user_id') : Auth::id(),
+            ]);
+        } elseif ($request->input('jenis_barang') == 'beras') {
+
+            $total = (float) $request->input('jumlah_beras');
+
+            $request->merge([
+                'total_beras' => $total,
+                'user_id' => $user->hasRole('Super Admin') ? $request->input('user_id') : Auth::id(),
+            ]);
+        }
+
         $request->validate([
             'nama_muzaki' => ['required'],
             'jumlah_jiwa' => ['required', 'numeric'],
             'alamat' => ['nullable'],
-            'jumlah_beras' => ['nullable'],
-            'jumlah_beras_diuangkan' => ['nullable', 'numeric'],
+            'jumlah_beras' => ['nullable', 'numeric'],
             'nominal_zakat_fitrah' => ['nullable', 'numeric'],
             'nominal_fidyah' => ['nullable', 'numeric'],
             'keterangan' => ['nullable'],
-        ]);
-
-        $nominalZakatFitrah = (int) $request->input('jumlah_beras_diuangkan', 0) + (int) $request->input('nominal_zakat_fitrah');
-
-        $total = $nominalZakatFitrah + (int) $request->input('nominal_fidyah');
-
-        $request->merge([
-            'nominal_zakat_fitrah' => $nominalZakatFitrah,
-            'total' => $total,
-            'user_id' => Auth::id(),
+            'user_id' => ['required'],
         ]);
 
         ZakatFitrah::create($request->all());
@@ -68,10 +88,12 @@ class ZakatFitrahController extends Controller
      */
     public function edit(ZakatFitrah $zakatFitrah)
     {
-        $zakatPerJiwa = ZakatPerJiwa::first()->nominal;
+        $zakatPerJiwaUang = ZakatPerJiwa::where('key', 'uang')->first()->nominal ?? 0;
+        $zakatPerJiwaBeras = ZakatPerJiwa::where('key', 'beras')->first()->nominal ?? 0;
 
         return view('zakat_fitrah.edit')->with([
-            'zakatPerJiwa' => $zakatPerJiwa,
+            'zakatPerJiwaUang' => $zakatPerJiwaUang,
+            'zakatPerJiwaBeras' => $zakatPerJiwaBeras,
             'zakatFitrah' => $zakatFitrah,
         ]);
     }
@@ -81,25 +103,34 @@ class ZakatFitrahController extends Controller
      */
     public function update(Request $request, ZakatFitrah $zakatFitrah)
     {
+        if ($request->input('jenis_barang') == 'uang') {
+
+            $total = (float) $request->input('nominal_fidyah') + (float) $request->input('nominal_zakat_fitrah');
+
+            $request->merge([
+                'jumlah_beras' => null,
+                'total_beras' => null,
+                'total_uang' => $total,
+            ]);
+        } elseif ($request->input('jenis_barang') == 'beras') {
+
+            $total = (float) $request->input('jumlah_beras');
+
+            $request->merge([
+                'nominal_zakat_fitrah' => null,
+                'total_uang' => null,
+                'total_beras' => $total,
+            ]);
+        }
+
         $request->validate([
             'nama_muzaki' => ['required'],
             'jumlah_jiwa' => ['required', 'numeric'],
             'alamat' => ['nullable'],
-            'jumlah_beras' => ['nullable'],
-            'jumlah_beras_diuangkan' => ['nullable', 'numeric'],
+            'jumlah_beras' => ['nullable', 'numeric'],
             'nominal_zakat_fitrah' => ['nullable', 'numeric'],
             'nominal_fidyah' => ['nullable', 'numeric'],
             'keterangan' => ['nullable'],
-        ]);
-
-        $nominalZakatFitrah = (int) $request->input('jumlah_beras_diuangkan', 0) + (int) $request->input('nominal_zakat_fitrah');
-
-        $total = $nominalZakatFitrah + (int) $request->input('nominal_fidyah');
-
-        $request->merge([
-            'nominal_zakat_fitrah' => $nominalZakatFitrah,
-            'total' => $total,
-            'user_id' => Auth::id(),
         ]);
 
         $zakatFitrah->update($request->all());

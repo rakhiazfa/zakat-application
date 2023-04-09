@@ -17,11 +17,12 @@ return new class extends Migration
             $table->string('nama_muzaki');
             $table->text('alamat')->nullable();
             $table->integer('jumlah_jiwa');
-            $table->integer('jumlah_beras')->nullable();
-            $table->integer('jumlah_beras_diuangkan')->nullable();
+            $table->string('jenis_barang')->nullable();
+            $table->double('jumlah_beras')->nullable();
             $table->bigInteger('nominal_zakat_fitrah')->nullable();
             $table->bigInteger('nominal_fidyah')->nullable();
-            $table->bigInteger('total');
+            $table->bigInteger('total_uang')->nullable();
+            $table->double('total_beras')->nullable();
             $table->text('keterangan')->nullable();
 
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\ZakatMaal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,11 @@ class ZakatMaalController extends Controller
      */
     public function create()
     {
-        return view('zakat_maal.create');
+        $users = User::whereHas('roles', function ($query) {
+            $query->where('name', '!=', 'Super Admin');
+        })->with('roles')->get();
+
+        return view('zakat_maal.create')->with('users', $users);
     }
 
     /**
@@ -34,6 +39,15 @@ class ZakatMaalController extends Controller
      */
     public function store(Request $request)
     {
+        $user = $request->user();
+
+        $total = (int) $request->input('nominal_zakat_maal') + (int) $request->input('nominal_infaq_shedekah');
+
+        $request->merge([
+            'total' => $total,
+            'user_id' => $user->hasRole('Super Admin') ? $request->input('user_id') : Auth::id(),
+        ]);
+
         $request->validate([
             'nama_muzaki' => ['required'],
             'alamat' => ['nullable'],
@@ -41,13 +55,7 @@ class ZakatMaalController extends Controller
             'nominal_zakat_maal' => ['nullable', 'numeric'],
             'nominal_infaq_shedekah' => ['nullable', 'numeric'],
             'keterangan' => ['nullable'],
-        ]);
-
-        $total = (int) $request->input('nominal_zakat_maal') + (int) $request->input('nominal_infaq_shedekah');
-
-        $request->merge([
-            'total' => $total,
-            'user_id' => Auth::id(),
+            'user_id' => ['required'],
         ]);
 
         ZakatMaal::create($request->all());
@@ -81,7 +89,6 @@ class ZakatMaalController extends Controller
 
         $request->merge([
             'total' => $total,
-            'user_id' => Auth::id(),
         ]);
 
         $zakatMaal->update($request->all());

@@ -22,7 +22,7 @@
 
         <div class="card hidden md:block">
             <div class="table-responsive">
-                <table class="table table-xs">
+                <table class="table table-xs table-bordered">
                     <thead>
                         <tr>
                             <th class="border" rowspan="2">No</th>
@@ -163,8 +163,8 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="7">TOTAL KESELURUHAN</th>
-                            <th colspan="2">{{ 'Rp. ' . number_format($totalKeseluruhan) }}</th>
+                            <th class="border" colspan="7">TOTAL KESELURUHAN</th>
+                            <th class="border" colspan="2">{{ 'Rp. ' . number_format($totalKeseluruhan) }}</th>
                         </tr>
                     </tfoot>
                 </table>

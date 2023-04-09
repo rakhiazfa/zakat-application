@@ -58,7 +58,8 @@
         @php
             $totalKeseluruhanKK = 0;
             $totalKeseluruhanJiwa = 0;
-            $totalKeseluruhanZakatFitrah = 0;
+            $totalKeseluruhanUangZakatFitrah = 0;
+            $totalKeseluruhanBerasZakatFitrah = 0;
             $totalKeseluruhanZakatMaal = 0;
             $totalKeseluruhanInfaqShedekah = 0;
             $totalKeseluruhanFidyah = 0;
@@ -99,8 +100,8 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->totalKK() }}</td>
                                 <td>{{ $item->totalJiwa() }}</td>
-                                <td></td>
-                                <td>{{ 'Rp. ' . number_format($item->totalZakatFitrah()) }}</td>
+                                <td>{{ ($item->totalBerasZakatFitrah() ?? 0) . ' Kg' }}</td>
+                                <td>{{ 'Rp. ' . number_format($item->totalUangZakatFitrah()) }}</td>
                                 <td></td>
                                 <td>{{ 'Rp. ' . number_format($item->totalZakatMaal()) }}</td>
                                 <td></td>
@@ -113,7 +114,8 @@
                             @php
                                 $totalKeseluruhanKK += $item->totalKK();
                                 $totalKeseluruhanJiwa += $item->totalJiwa();
-                                $totalKeseluruhanZakatFitrah += $item->totalZakatFitrah();
+                                $totalKeseluruhanUangZakatFitrah += $item->totalUangZakatFitrah();
+                                $totalKeseluruhanBerasZakatFitrah += $item->totalBerasZakatFitrah();
                                 $totalKeseluruhanZakatMaal += $item->totalZakatMaal();
                                 $totalKeseluruhanInfaqShedekah += $item->totalInfaqShedekah();
                                 $totalKeseluruhanFidyah += $item->totalFidyah();
@@ -125,12 +127,18 @@
                         <th colspan="2">TOTAL KESELURUHAN</th>
                         <th>{{ $totalKeseluruhanKK }}</th>
                         <th>{{ $totalKeseluruhanJiwa }}</th>
+                        <th>
+                            {{ ($totalKeseluruhanBerasZakatFitrah ?? 0) . ' Kg' }}
+                        </th>
+                        <th style="text-align: right;">
+                            {{ 'Rp. ' . number_format($totalKeseluruhanUangZakatFitrah) }}
+                        </th>
                         <th colspan="2" style="text-align: right;">
-                            {{ 'Rp. ' . number_format($totalKeseluruhanZakatFitrah) }}</th>
+                            {{ 'Rp. ' . number_format($totalKeseluruhanZakatMaal) }}
+                        </th>
                         <th colspan="2" style="text-align: right;">
-                            {{ 'Rp. ' . number_format($totalKeseluruhanZakatMaal) }}</th>
-                        <th colspan="2" style="text-align: right;">
-                            {{ 'Rp. ' . number_format($totalKeseluruhanInfaqShedekah) }}</th>
+                            {{ 'Rp. ' . number_format($totalKeseluruhanInfaqShedekah) }}
+                        </th>
                         <th colspan="2" style="text-align: right;">
                             {{ 'Rp. ' . number_format($totalKeseluruhanFidyah) }}</th>
                         <th>{{ 'Rp. ' . number_format($totalKeseluruhan) }}</th>

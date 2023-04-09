@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('zakat_per_jiwa', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('nominal')->default(32500);
+            $table->string('key')->default('uang');
+            $table->double('nominal')->default(32500);
             $table->timestamps();
         });
     }

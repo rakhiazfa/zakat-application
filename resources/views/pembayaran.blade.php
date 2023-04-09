@@ -17,9 +17,15 @@
                 <div class="table-responsive mb-10">
                     <table class="table table-sm table-bordered">
                         <tr>
-                            <th>Zakat / Jiwa</th>
-                            <th id="zakat-per-jiwa" data-nominal="{{ $zakatPerJiwa }}">
-                                Rp. {{ number_format($zakatPerJiwa) }}
+                            <th>Uang - Zakat / Jiwa ( Rp. )</th>
+                            <th id="zakat-per-jiwa-uang" data-nominal="{{ $zakatPerJiwaUang }}">
+                                {{ 'Rp. ' . number_format($zakatPerJiwaUang) }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Beras - Zakat / Jiwa ( Kg )</th>
+                            <th id="zakat-per-jiwa-beras" data-nominal="{{ $zakatPerJiwaBeras }}">
+                                {{ $zakatPerJiwaBeras . ' Kg' }}
                             </th>
                         </tr>
                     </table>
@@ -54,26 +60,37 @@
                             @enderror
                         </div>
 
+                        <div class="field md:col-span-2">
+                            <label class="label mb-3">Jenis Barang</label>
+                            <div class="flex items-center gap-5">
+                                <div class="flex items-center gap-1">
+                                    <input type="radio" name="jenis_barang" value="uang" id="uang"
+                                        {{ old('jenis_barang', 'uang') == 'uang' ? 'checked' : '' }}>
+                                    <label class="label mb-0" for="uang">Uang</label>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <input type="radio" name="jenis_barang" value="beras" id="beras"
+                                        {{ old('jenis_barang', 'uang') == 'beras' ? 'checked' : '' }}>
+                                    <label class="label mb-0" for="beras">Beras</label>
+                                </div>
+                            </div>
+                            @error('jenis_barang')
+                                <p class="invalid-field">{{ $message }}</p>
+                            @enderror
+                        </div>
+
                         <div class="field">
-                            <label class="label">Jumlah Beras ( Kg )</label>
-                            <input type="number" class="control" name="jumlah_beras" value="{{ old('jumlah_beras') }}">
+                            <label class="label">Jumlah Beras - Zakat Fitrah ( Kg )</label>
+                            <input type="number" class="control" name="jumlah_beras" step="any"
+                                value="{{ old('jumlah_beras') }}" disabled>
                             @error('jumlah_beras')
                                 <p class="invalid-field">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div class="field">
-                            <label class="label">Beras Diuangkan ( Rp. )</label>
-                            <input type="number" class="control" name="jumlah_beras_diuangkan"
-                                value="{{ old('jumlah_beras_diuangkan') }}">
-                            @error('jumlah_beras_diuangkan')
-                                <p class="invalid-field">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="field">
-                            <label class="label">Zakat Fitrah ( Rp. )</label>
-                            <input type="number" class="control" name="nominal_zakat_fitrah"
+                            <label class="label">Jumlah Uang - Zakat Fitrah ( Rp. )</label>
+                            <input type="number" class="control" name="nominal_zakat_fitrah" step="any"
                                 value="{{ old('nominal_zakat_fitrah') }}" reaonly>
                             @error('nominal_zakat_fitrah')
                                 <p class="invalid-field">{{ $message }}</p>
@@ -119,6 +136,23 @@
                             <label class="label">Keterangan</label>
                             <textarea class="control" name="keterangan" rows="2">{{ old('keterangan') }}</textarea>
                         </div>
+
+                        @role('Super Admin')
+                            <div class="field">
+                                <label class="label">User</label>
+                                <select class="control" name="user_id">
+                                    <option selected disabled>Pilih Amilin</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}"
+                                            {{ old('user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('user_id')
+                                    <p class="invalid-field">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        @endrole
 
                         <div class="flex justify-end md:col-span-2">
                             <button type="submit" class="button bg-blue-500 hover:bg-blue-600 text-white">

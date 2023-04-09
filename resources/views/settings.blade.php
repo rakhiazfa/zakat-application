@@ -19,8 +19,14 @@
                 <div class="grid gap-5">
 
                     <div class="field">
-                        <label class="label">Zakat / Jiwa</label>
-                        <input type="number" class="control" name="nominal" value="{{ $zakatPerJiwa }}">
+                        <label class="label">Uang - Zakat / Jiwa ( Rp. )</label>
+                        <input type="number" class="control" name="nominal[uang]" value="{{ $zakatPerJiwaUang }}">
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Beras - Zakat / Jiwa ( Kg )</label>
+                        <input type="number" class="control" name="nominal[beras]" value="{{ $zakatPerJiwaBeras }}"
+                            step="any">
                     </div>
 
                     <div class="flex justify-end">

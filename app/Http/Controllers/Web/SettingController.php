@@ -10,16 +10,23 @@ class SettingController extends Controller
 {
     public function index()
     {
-        $zakatPerJiwa = ZakatPerJiwa::first()->nominal ?? 0;
+        $zakatPerJiwaUang = ZakatPerJiwa::where('key', 'uang')->first()->nominal ?? 0;
+        $zakatPerJiwaBeras = ZakatPerJiwa::where('key', 'beras')->first()->nominal ?? 0;
 
-        return view('settings')->with('zakatPerJiwa', $zakatPerJiwa);
+        return view('settings')->with([
+            'zakatPerJiwaUang' => $zakatPerJiwaUang,
+            'zakatPerJiwaBeras' => $zakatPerJiwaBeras,
+        ]);
     }
 
     public function updateZakatPerJiwa(Request $request)
     {
-        $request->validate(['nominal' => ['required', 'numeric']]);
+        $request->validate(['nominal' => ['array']]);
 
-        ZakatPerJiwa::first()->update($request->all());
+        foreach ($request->input('nominal') as $key => $nominal) {
+
+            ZakatPerJiwa::where('key', $key)->update(['nominal' => $nominal]);
+        }
 
         return back()->with('success', 'Berhasil memperbarui zakat per jiwa.');
     }

@@ -17,12 +17,13 @@
         @endif
 
         @php
-            $totalKeseluruhan = 0;
+            $totalKeseluruhanUang = 0;
+            $totalKeseluruhanBeras = 0;
         @endphp
 
         <div class="card hidden md:block">
             <div class="table-responsive">
-                <table class="table table-xs table-bordered">
+                <table class="table table-xxs table-bordered">
                     <thead>
                         <tr>
                             <th class="border">No</th>
@@ -30,9 +31,11 @@
                             <th class="border">Nama Muzaki</th>
                             <th class="border">Alamat</th>
                             <th class="border">Jumlah Jiwa</th>
-                            <th class="border">Zakat Fitrah ( Rp. )</th>
+                            <th class="border">Beras - Zakat Fitrah ( Kg )</th>
+                            <th class="border">Uang - Zakat Fitrah ( Rp. )</th>
                             <th class="border">Fidyah ( Rp. )</th>
-                            <th class="border">Total ( Rp. )</th>
+                            <th class="border">Total Beras ( Kg )</th>
+                            <th class="border">Total Uang ( Rp. )</th>
                             <th class="border">#</th>
                         </tr>
                     </thead>
@@ -44,9 +47,11 @@
                                 <th>{{ $item->nama_muzaki }}</th>
                                 <td>{{ $item->alamat ?? '-' }}</td>
                                 <td>{{ $item->jumlah_jiwa }}</td>
-                                <td>Rp. {{ number_format($item->nominal_zakat_fitrah) }}</td>
-                                <td>Rp. {{ number_format($item->nominal_fidyah) }}</td>
-                                <td>Rp. {{ number_format($item->total) }}</td>
+                                <td>{{ ($item->jumlah_beras ?? 0) . ' Kg' }}</td>
+                                <td>{{ 'Rp. ' . number_format($item->nominal_zakat_fitrah) }}</td>
+                                <td>{{ 'Rp. ' . number_format($item->nominal_fidyah) }}</td>
+                                <td>{{ ($item->total_beras ?? 0) . ' Kg' }}</td>
+                                <td>{{ 'Rp. ' . number_format($item->total_uang) }}</td>
                                 <td>
                                     <div class="flex items-center gap-5">
 
@@ -74,7 +79,7 @@
                                             <div class="modal-content-wrapper">
                                                 <div class="modal-content">
                                                     <div class="header">
-                                                        <h4>Rincian Zakat Fitrah</h4>
+                                                        <h4 class="text-lg">Rincian Zakat Fitrah</h4>
                                                     </div>
                                                     <div class="body">
                                                         <div class="mb-5">
@@ -94,7 +99,13 @@
                                                             <span class="ml-1">{{ $item->jumlah_jiwa }}</span>
                                                         </div>
                                                         <div class="mb-5">
-                                                            <label class="label">Jumlah Zakat Fitrah ( Rp. )</label>
+                                                            <label class="label">Beras - Zakat Fitrah ( Kg )</label>
+                                                            <span class="ml-1">
+                                                                {{ ($item->jumlah_beras ?? 0) . ' Kg' }}
+                                                            </span>
+                                                        </div>
+                                                        <div class="mb-5">
+                                                            <label class="label">Uang - Zakat Fitrah ( Rp. )</label>
                                                             <span class="ml-1">
                                                                 {{ 'Rp. ' . number_format($item->nominal_zakat_fitrah) }}
                                                             </span>
@@ -106,9 +117,15 @@
                                                             </span>
                                                         </div>
                                                         <div class="mb-5">
-                                                            <label class="label">Total ( Rp. )</label>
+                                                            <label class="label">Total Beras ( Kg )</label>
                                                             <span
-                                                                class="ml-1">{{ 'Rp. ' . number_format($item->total) }}
+                                                                class="ml-1">{{ ($item->total_beras ?? 0) . ' Kg' }}
+                                                            </span>
+                                                        </div>
+                                                        <div class="mb-5">
+                                                            <label class="label">Total Uang ( Rp. )</label>
+                                                            <span
+                                                                class="ml-1">{{ 'Rp. ' . number_format($item->total_uang) }}
                                                             </span>
                                                         </div>
                                                     </div>
@@ -154,14 +171,19 @@
                                 </td>
                             </tr>
                             @php
-                                $totalKeseluruhan += $item->total;
+                                $totalKeseluruhanUang += $item->total_uang;
+                                $totalKeseluruhanBeras += $item->total_beras;
                             @endphp
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="7">TOTAL KESELURUHAN</th>
-                            <th colspan="2">{{ 'Rp. ' . number_format($totalKeseluruhan) }}</th>
+                            <th colspan="9">TOTAL KESELURUHAN UANG ( Rp. )</th>
+                            <th colspan="2">{{ 'Rp. ' . number_format($totalKeseluruhanUang) }}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="9">TOTAL KESELURUHAN BERAS ( Kg )</th>
+                            <th colspan="2">{{ ($totalKeseluruhanBeras ?? 0) . ' Kg' }}</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -169,7 +191,8 @@
         </div>
 
         @php
-            $totalKeseluruhanMobile = 0;
+            $totalKeseluruhanUangMobile = 0;
+            $totalKeseluruhanBerasMobile = 0;
         @endphp
 
         <div class="grid gap-7 md:hidden">
@@ -193,7 +216,12 @@
                         </div>
 
                         <div>
-                            <label class="label">Zakat Fitrah ( Rp. )</label>
+                            <label class="label">Beras - Zakat Fitrah ( Kg )</label>
+                            <span class="ml-1">{{ ($item->jumlah_beras ?? 0) . ' Kg' }}</span>
+                        </div>
+
+                        <div>
+                            <label class="label">Uang - Zakat Fitrah ( Rp. )</label>
                             <span class="ml-1">{{ 'Rp. ' . number_format($item->nominal_zakat_fitrah) }}</span>
                         </div>
 
@@ -203,9 +231,15 @@
                         </div>
 
                         <div>
-                            <label class="label">Total</label>
-                            <span class="ml-1">{{ 'Rp. ' . number_format($item->total) }}</span>
+                            <label class="label">Total Beras ( Kg )</label>
+                            <span class="ml-1">{{ ($item->total_beras ?? 0) . ' Kg' }}</span>
                         </div>
+
+                        <div>
+                            <label class="label">Total Uang ( Rp. )</label>
+                            <span class="ml-1">{{ 'Rp. ' . number_format($item->total_uang) }}</span>
+                        </div>
+
                     </div>
 
                     <div class="flex justify-end items-center gap-5">
@@ -251,7 +285,13 @@
                                             <span class="ml-1">{{ $item->jumlah_jiwa }}</span>
                                         </div>
                                         <div class="mb-5">
-                                            <label class="label">Jumlah Zakat Fitrah ( Rp. )</label>
+                                            <label class="label">Beras - Zakat Fitrah ( Kg )</label>
+                                            <span class="ml-1">
+                                                {{ ($item->jumlah_beras ?? 0) . ' Kg' }}
+                                            </span>
+                                        </div>
+                                        <div class="mb-5">
+                                            <label class="label">Uang - Zakat Fitrah ( Rp. )</label>
                                             <span class="ml-1">
                                                 {{ 'Rp. ' . number_format($item->nominal_zakat_fitrah) }}
                                             </span>
@@ -263,8 +303,13 @@
                                             </span>
                                         </div>
                                         <div class="mb-5">
-                                            <label class="label">Total ( Rp. )</label>
-                                            <span class="ml-1">{{ 'Rp. ' . number_format($item->total) }}
+                                            <label class="label">Total Beras ( Kg )</label>
+                                            <span class="ml-1">{{ ($item->total_beras ?? 0) . ' Kg' }}
+                                            </span>
+                                        </div>
+                                        <div class="mb-5">
+                                            <label class="label">Total Uang ( Rp. )</label>
+                                            <span class="ml-1">{{ 'Rp. ' . number_format($item->total_uang) }}
                                             </span>
                                         </div>
                                     </div>
@@ -308,13 +353,19 @@
                     </div>
                 </div>
                 @php
-                    $totalKeseluruhanMobile += $item->total;
+                    $totalKeseluruhanUangMobile += $item->total_uang;
+                    $totalKeseluruhanBerasMobile += $item->total_beras;
                 @endphp
             @endforeach
 
             <div class="card">
-                <label class="label">TOTAL KESELURUHAN</label>
-                <span class="ml-1 font-medium">{{ 'Rp. ' . number_format($totalKeseluruhanMobile) }}</span>
+                <label class="label">TOTAL KESELURUHAN UANG ( Rp. )</label>
+                <span class="ml-1 font-medium">{{ 'Rp. ' . number_format($totalKeseluruhanUangMobile) }}</span>
+            </div>
+
+            <div class="card">
+                <label class="label">TOTAL KESELURUHAN BERAS ( Kg )</label>
+                <span class="ml-1 font-medium">{{ ($totalKeseluruhanBerasMobile ?? 0) . ' Kg' }}</span>
             </div>
 
         </div>

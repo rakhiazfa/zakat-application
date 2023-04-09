@@ -18,7 +18,7 @@ class DashboardController extends Controller
 
         $jumlahKK = ZakatFitrah::count();
 
-        $totalZakatFitrah = ZakatFitrah::sum('total');
+        $totalZakatFitrah = ZakatFitrah::sum('total_uang');
         $totalZakatMaalInfakShedekah = ZakatMaal::sum('total');
 
         $totalUang = $totalZakatFitrah + $totalZakatMaalInfakShedekah;

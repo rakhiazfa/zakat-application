@@ -73,6 +73,23 @@
                             <textarea class="control" name="keterangan" rows="2">{{ old('keterangan') }}</textarea>
                         </div>
 
+                        @role('Super Admin')
+                            <div class="field">
+                                <label class="label">User</label>
+                                <select class="control" name="user_id">
+                                    <option selected disabled>Pilih Amilin</option>
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}"
+                                            {{ old('user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('user_id')
+                                    <p class="invalid-field">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        @endrole
+
                         <div class="flex justify-end md:col-span-2">
                             <button type="submit" class="button bg-blue-500 hover:bg-blue-600 text-white">
                                 Simpan

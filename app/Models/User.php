@@ -79,7 +79,12 @@ class User extends Authenticatable
         return $this->zakatFitrah->sum('jumlah_jiwa');
     }
 
-    public function totalZakatFitrah()
+    public function totalBerasZakatFitrah()
+    {
+        return $this->zakatFitrah->sum('jumlah_beras');
+    }
+
+    public function totalUangZakatFitrah()
     {
         return $this->zakatFitrah->sum('nominal_zakat_fitrah');
     }
@@ -101,6 +106,6 @@ class User extends Authenticatable
 
     public function totalKeseluruhan()
     {
-        return $this->totalZakatFitrah() + $this->totalZakatMaal() + $this->totalInfaqShedekah() + $this->totalFidyah();
+        return $this->totalUangZakatFitrah() + $this->totalZakatMaal() + $this->totalInfaqShedekah() + $this->totalFidyah();
     }
 }

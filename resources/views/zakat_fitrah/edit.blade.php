@@ -23,9 +23,15 @@
                 <div class="table-responsive mb-10">
                     <table class="table table-sm table-bordered">
                         <tr>
-                            <th>Zakat / Jiwa</th>
-                            <th id="zakat-per-jiwa" data-nominal="{{ $zakatPerJiwa }}">
-                                Rp. {{ number_format($zakatPerJiwa) }}
+                            <th>Uang - Zakat / Jiwa ( Rp. )</th>
+                            <th id="zakat-per-jiwa-uang" data-nominal="{{ $zakatPerJiwaUang }}">
+                                {{ 'Rp. ' . number_format($zakatPerJiwaUang) }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>Beras - Zakat / Jiwa ( Kg )</th>
+                            <th id="zakat-per-jiwa-beras" data-nominal="{{ $zakatPerJiwaBeras }}">
+                                {{ $zakatPerJiwaBeras . ' Kg' }}
                             </th>
                         </tr>
                     </table>
@@ -63,20 +69,30 @@
                             @enderror
                         </div>
 
-                        <div class="field">
-                            <label class="label">Jumlah Beras ( Kg )</label>
-                            <input type="number" class="control" name="jumlah_beras"
-                                value="{{ $zakatFitrah->jumlah_beras }}">
-                            @error('jumlah_beras')
+                        <div class="field md:col-span-2">
+                            <label class="label mb-3">Jenis Barang</label>
+                            <div class="flex items-center gap-5">
+                                <div class="flex items-center gap-1">
+                                    <input type="radio" name="jenis_barang" value="uang" id="uang"
+                                        {{ $zakatFitrah->jenis_barang == 'uang' ? 'checked' : '' }}>
+                                    <label class="label mb-0" for="uang">Uang</label>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <input type="radio" name="jenis_barang" value="beras" id="beras"
+                                        {{ $zakatFitrah->jenis_barang == 'beras' ? 'checked' : '' }}>
+                                    <label class="label mb-0" for="beras">Beras</label>
+                                </div>
+                            </div>
+                            @error('jenis_barang')
                                 <p class="invalid-field">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div class="field">
-                            <label class="label">Beras Diuangkan ( Rp. )</label>
-                            <input type="number" class="control" name="jumlah_beras_diuangkan"
-                                value="{{ $zakatFitrah->jumlah_beras_diuangkan }}">
-                            @error('jumlah_beras_diuangkan')
+                            <label class="label">Jumlah Beras ( Kg )</label>
+                            <input type="number" class="control" name="jumlah_beras" step="any"
+                                value="{{ $zakatFitrah->jumlah_beras }}">
+                            @error('jumlah_beras')
                                 <p class="invalid-field">{{ $message }}</p>
                             @enderror
                         </div>

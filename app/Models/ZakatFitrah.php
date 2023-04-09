@@ -19,8 +19,8 @@ class ZakatFitrah extends Model
      * @var array
      */
     protected $fillable = [
-        'tanggal', 'nama_muzaki', 'alamat', 'jumlah_jiwa', 'nominal_zakat_fitrah',
-        'nominal_fidyah', 'total', 'keterangan', 'user_id',
+        'tanggal', 'nama_muzaki', 'alamat', 'jumlah_jiwa', 'jenis_barang', 'nominal_zakat_fitrah',
+        'jumlah_beras', 'nominal_fidyah', 'total_uang', 'total_beras', 'keterangan', 'user_id',
     ];
 
     public function user(): BelongsTo

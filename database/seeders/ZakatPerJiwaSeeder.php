@@ -13,6 +13,8 @@ class ZakatPerJiwaSeeder extends Seeder
      */
     public function run(): void
     {
-        ZakatPerJiwa::create(['nominal' => 32500]);
+        ZakatPerJiwa::create(['key' => 'uang', 'nominal' => 32500]);
+
+        ZakatPerJiwa::create(['key' => 'beras', 'nominal' => 2.5]);
     }
 }
