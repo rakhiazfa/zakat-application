@@ -11,7 +11,7 @@
             </div>
         @endif
 
-        <div class="grid gap-5">
+        <div class="grid grid-cols-1 gap-5">
 
             <div class="card">
                 <a class="button bg-blue-500 hover:bg-blue-600 text-white w-max" href="{{ route('zakat_maal') }}">

@@ -11,7 +11,7 @@
             </div>
         @endif
 
-        <div class="grid gap-5">
+        <div class="grid grid-cols-1 gap-5">
 
             <div class="card pt-5">
                 <div class="table-responsive mb-10">

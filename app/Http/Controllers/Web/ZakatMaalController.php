@@ -46,6 +46,7 @@ class ZakatMaalController extends Controller
         $request->merge([
             'total' => $total,
             'user_id' => $user->hasRole('Super Admin') ? $request->input('user_id') : Auth::id(),
+            'tanggal' => date('Y-m-d'),
         ]);
 
         $request->validate([

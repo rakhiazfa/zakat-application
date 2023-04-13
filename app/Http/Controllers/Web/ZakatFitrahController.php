@@ -56,6 +56,7 @@ class ZakatFitrahController extends Controller
             $request->merge([
                 'total_uang' => $total,
                 'user_id' => $user->hasRole('Super Admin') ? $request->input('user_id') : Auth::id(),
+                'tanggal' => date('Y-m-d'),
             ]);
         } elseif ($request->input('jenis_barang') == 'beras') {
 
@@ -64,6 +65,7 @@ class ZakatFitrahController extends Controller
             $request->merge([
                 'total_beras' => $total,
                 'user_id' => $user->hasRole('Super Admin') ? $request->input('user_id') : Auth::id(),
+                'tanggal' => date('Y-m-d'),
             ]);
         }
 
