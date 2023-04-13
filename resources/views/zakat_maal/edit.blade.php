@@ -28,6 +28,14 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
                         <div class="field">
+                            <label class="label">Tanggal</label>
+                            <input type="date" class="control" name="tanggal" value="{{ $zakatMaal->tanggal }}">
+                            @error('tanggal')
+                                <p class="invalid-field">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="field">
                             <label class="label">Nama Muzaki</label>
                             <input type="text" class="control" name="nama_muzaki"
                                 value="{{ $zakatMaal->nama_muzaki }}">
