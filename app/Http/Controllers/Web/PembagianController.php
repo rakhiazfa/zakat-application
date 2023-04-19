@@ -29,4 +29,29 @@ class PembagianController extends Controller
 
         return back()->with('success', 'Berhasil memperbarui persentase pembagian.');
     }
+
+    public function create()
+    {
+        return view('pembagian.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'jenis_penerima' => ['required'],
+            'persentase' => ['required', 'numeric'],
+            'jumlah_penerima' => ['required', 'numeric'],
+        ]);
+
+        Pembagian::create($request->all());
+
+        return redirect()->route('pembagian')->with('success', 'Penerima berhasil ditambahkan.');
+    }
+
+    public function destroy(Request $request, Pembagian $pembagian)
+    {
+        $pembagian->delete();
+
+        return redirect()->route('pembagian')->with('success', 'Penerima berhasil dihapus.');
+    }
 }

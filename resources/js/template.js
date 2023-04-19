@@ -14,11 +14,21 @@ $(window).on("load", () => {
     });
 
     $(".admin-wrapper .sidebar").on("sidebar:show", (e) => {
+        $("html, body").css({
+            overflow: "hidden",
+            height: "100%",
+        });
+
         $(e.target).addClass("active");
         $(".admin-wrapper .sidebar-overlay").addClass("active");
     });
 
     $(".admin-wrapper .sidebar").on("sidebar:hide", (e) => {
+        $("html, body").css({
+            overflow: "auto",
+            height: "auto",
+        });
+
         $(e.target).removeClass("active");
         $(".admin-wrapper .sidebar-overlay").removeClass("active");
     });
