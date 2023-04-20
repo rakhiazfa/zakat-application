@@ -28,7 +28,7 @@ class ZakatMaalExport implements FromCollection, WithHeadings
             'Nominal Infaq / Shodaqoh ( Rp. )',
             'Total Uang ( Rp. )',
             'Keterangan',
-            'RT',
+            'USER ID',
             'Created At',
             'Updated At',
         ];

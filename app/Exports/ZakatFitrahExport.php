@@ -31,7 +31,7 @@ class ZakatFitrahExport implements FromCollection, WithHeadings
             'Total Uang ( Rp. )',
             'Total Beras ( Kg )',
             'Keterangan',
-            'RT',
+            'USER ID',
             'Created At',
             'Updated At',
         ];
