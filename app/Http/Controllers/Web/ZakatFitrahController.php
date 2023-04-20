@@ -17,8 +17,13 @@ class ZakatFitrahController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
+        $q = $request->get('q', false);
 
-        $zakatFitrah = $user->hasRole('Amil Zakat') ? $user->zakatFitrah : ZakatFitrah::all();
+        $zakatFitrah = $user->hasRole('Amil Zakat') ? $user->zakatFitrah()->when($q, function ($query) use ($q) {
+            $query->where('nama_muzaki', 'LIKE', "%$q%");
+        })->get() : ZakatFitrah::when($q, function ($query) use ($q) {
+            $query->where('nama_muzaki', 'LIKE', "%$q%");
+        })->get();
 
         return view('zakat_fitrah')->with('zakatFitrah', $zakatFitrah);
     }

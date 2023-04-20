@@ -16,6 +16,22 @@
             </div>
         @endif
 
+        <div class="card mb-5">
+            <form class="flex items-center gap-5">
+                <div class="field">
+                    <input type="text" class="control" name="q" value="{{ request()->get('q') }}"
+                        placeholder="Cari Muzaki . . .">
+                </div>
+                <button type="submit" class="button bg-blue-500 hover:bg-blue-600 text-white">
+                    Cari
+                </button>
+                <a class="w-[30px] sm:w-[35px] aspect-square grid place-items-center rounded-md bg-blue-500 hover:bg-blue-600 text-white px-2"
+                    href="{{ route('zakat_fitrah') }}">
+                    <i class="text-[1rem] sm:text-[1.15rem] pointer-events-none uil uil-sync"></i>
+                </a>
+            </form>
+        </div>
+
         @php
             $totalKeseluruhanUang = 0;
             $totalKeseluruhanBeras = 0;

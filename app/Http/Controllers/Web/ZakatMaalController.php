@@ -16,8 +16,13 @@ class ZakatMaalController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
+        $q = $request->get('q', false);
 
-        $zakatMaal = $user->hasRole('Amil Zakat') ? $user->zakatMaal : ZakatMaal::all();
+        $zakatMaal = $user->hasRole('Amil Zakat') ? $user->zakatMaal()->when($q, function ($query) use ($q) {
+            $query->where('nama_muzaki', 'LIKE', "%$q%");
+        })->get() : ZakatMaal::when($q, function ($query) use ($q) {
+            $query->where('nama_muzaki', 'LIKE', "%$q%");
+        })->get();
 
         return view('zakat_maal')->with('zakatMaal', $zakatMaal);
     }
