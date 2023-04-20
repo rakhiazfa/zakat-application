@@ -11,7 +11,9 @@
                 <div class="card-body">
                     <div class="flex items-center gap-5">
                         <i class="text-2xl uil uil-credit-card"></i>
-                        <span class="font-semibold"> {{ 'Rp. ' . number_format($totalUang) }} </span>
+                        <span class="font-semibold">
+                            {{ 'Rp. ' . number_format($totalUang - \App\Models\Pengeluaran::getTotalPengeluaran()) }}
+                        </span>
                     </div>
                 </div>
             </div>
