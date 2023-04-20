@@ -36,3 +36,5 @@ Route::name('zakat_fitrah')->prefix('zakat-fitrah')->middleware('auth:web')->gro
 Route::name('zakat_maal')->prefix('zakat-maal')->middleware('auth:web')->group(base_path('routes/web/zakat_maal.php'));
 
 Route::name('pembagian')->prefix('pembagian')->middleware('auth:web', 'role:Super Admin')->group(base_path('routes/web/pembagian.php'));
+
+Route::name('pengeluaran')->prefix('pengeluaran')->middleware('auth:web', 'role:Super Admin')->group(base_path('routes/web/pengeluaran.php'));

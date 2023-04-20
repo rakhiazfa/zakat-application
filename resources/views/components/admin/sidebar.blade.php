@@ -57,6 +57,14 @@
                 </li>
 
                 <li>
+                    <a class="sidebar-link {{ request()->routeIs('pengeluaran*') ? 'active' : '' }}"
+                        href="{{ route('pengeluaran') }}">
+                        <i class="uil uil-share"></i>
+                        <span> Pengeluaran </span>
+                    </a>
+                </li>
+
+                <li>
                     <a class="sidebar-link {{ request()->routeIs('users*') ? 'active' : '' }}"
                         href="{{ route('users') }}">
                         <i class="uil uil-user"></i>

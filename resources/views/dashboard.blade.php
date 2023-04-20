@@ -152,6 +152,36 @@
                 <table class="table table-xs table-bordered">
                     <thead>
                         <tr>
+                            <th>Pemasukan</th>
+                            <th>Pengeluaran</th>
+                            <th>Hasil</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>{{ 'Rp. ' . number_format($totalKeseluruhan) }}</th>
+                            <th>{{ 'Rp. ' . number_format(\App\Models\Pengeluaran::getTotalPengeluaran()) }}</th>
+
+                            @php
+                                $totalKeseluruhan -= \App\Models\Pengeluaran::getTotalPengeluaran();
+                            @endphp
+
+                            <th>{{ 'Rp. ' . number_format($totalKeseluruhan) }}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        @php
+            $totalPersentase = 0;
+        @endphp
+
+        <div class="card mb-5">
+            <div class="table-responsive">
+                <table class="table table-xs table-bordered">
+                    <thead>
+                        <tr>
                             <th>Jenis Penerima</th>
                             <th>Total Uang</th>
                             <th>Persentase ( % )</th>
@@ -172,10 +202,16 @@
                                     {{ 'Rp. ' . number_format((float) $item->inputTotalUang($totalKeseluruhan) / (float) $item->jumlah_penerima) }}
                                 </td>
                             </tr>
+
+                            @php
+                                $totalPersentase += $item->persentase;
+                            @endphp
                         @endforeach
                     </tbody>
                     <tfoot>
-
+                        <th colspan="2"></th>
+                        <th>{{ $totalPersentase . ' %' }}</th>
+                        <th colspan="3"></th>
                     </tfoot>
                 </table>
             </div>
