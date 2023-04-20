@@ -28,8 +28,8 @@
 
     .button {
         @apply flex justify-center items-center 
-        text-[0.7rem] xs:text-xs sm:text-[0.825rem] 
-        font-medium rounded-md px-6 py-2 whitespace-nowrap;
+        text-[0.575rem] xs:text-xs sm:text-[0.825rem] 
+        font-medium rounded-md px-4 xs:px-6 py-2 whitespace-nowrap;
     }
     .button.sm {
         @apply text-xs;

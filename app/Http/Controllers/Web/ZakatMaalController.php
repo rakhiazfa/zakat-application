@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Exports\ZakatMaalExport;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\ZakatMaal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ZakatMaalController extends Controller
 {
@@ -110,5 +112,10 @@ class ZakatMaalController extends Controller
         $zakatMaal->delete();
 
         return redirect()->route('zakat_maal')->with('success', 'Berhasil menghapus zakat maal / infaq / shedekah.');
+    }
+
+    public function export(Request $request)
+    {
+        return Excel::download(new ZakatMaalExport, 'Zakat Maal.xlsx');
     }
 }

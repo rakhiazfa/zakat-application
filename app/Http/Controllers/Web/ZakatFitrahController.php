@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Exports\ZakatFitrahExport;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\ZakatFitrah;
 use App\Models\ZakatPerJiwa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ZakatFitrahController extends Controller
 {
@@ -153,5 +155,10 @@ class ZakatFitrahController extends Controller
         $zakatFitrah->delete();
 
         return redirect()->route('zakat_fitrah')->with('success', 'Berhasil menghapus zakat fitrah.');
+    }
+
+    public function export(Request $request)
+    {
+        return Excel::download(new ZakatFitrahExport, 'Zakat Fitrah.xlsx');
     }
 }

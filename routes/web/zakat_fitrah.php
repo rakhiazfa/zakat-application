@@ -14,3 +14,5 @@ Route::get('/{zakatFitrah}/edit', [ZakatFitrahController::class, 'edit'])->name(
 Route::put('/{zakatFitrah}', [ZakatFitrahController::class, 'update'])->name('.update');
 
 Route::delete('/{zakatFitrah}', [ZakatFitrahController::class, 'destroy'])->name('.destroy');
+
+Route::get('/export', [ZakatFitrahController::class, 'export'])->name('.export');

@@ -14,3 +14,5 @@ Route::get('/{zakatMaal}/edit', [ZakatMaalController::class, 'edit'])->name('.ed
 Route::put('/{zakatMaal}', [ZakatMaalController::class, 'update'])->name('.update');
 
 Route::delete('/{zakatMaal}', [ZakatMaalController::class, 'destroy'])->name('.destroy');
+
+Route::get('/export', [ZakatMaalController::class, 'export'])->name('.export');

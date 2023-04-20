@@ -4,9 +4,15 @@
 
         <div class="flex justify-between items-center gap-10">
             <h1 class="title">Zakat Maal / Infaq / Shedekah</h1>
-            <a class="button bg-blue-500 hover:bg-blue-600 text-white mb-5" href="{{ route('zakat_maal.create') }}">
-                Tambah Data
-            </a>
+            <div class="flex items-center gap-5">
+                <a class="button bg-blue-500 hover:bg-blue-600 text-white mb-5" href="{{ route('zakat_maal.create') }}">
+                    Tambah Data
+                </a>
+                <a class="button bg-emerald-500 hover:bg-emerald-600 text-white mb-5"
+                    href="{{ route('zakat_maal.export') }}">
+                    Export
+                </a>
+            </div>
         </div>
 
         @if (session('success'))
