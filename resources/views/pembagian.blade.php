@@ -16,6 +16,14 @@
             </div>
         @endif
 
+        @foreach ($pembagian as $item)
+            <form action="{{ route('pembagian.destroy', ['pembagian' => $item]) }}" method="POST"
+                id="deletePembagianForm-{{ $item->id }}">
+                @csrf
+                @method('DELETE')
+            </form>
+        @endforeach
+
         <div class="card p-5">
             <form action="{{ route('pembagian.update') }}" method="POST">
                 @csrf
@@ -46,11 +54,6 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="{{ route('pembagian.destroy', ['pembagian' => $item]) }}" method="POST"
-                            id="deletePembagianForm-{{ $loop->iteration }}">
-                            @csrf
-                            @method('DELETE')
-                        </form>
                         <div class="modal" id="deletePembagian-{{ $loop->iteration }}">
                             <div class="modal-content-wrapper">
                                 <div class="modal-content">
@@ -64,7 +67,7 @@
                                         </button>
                                         <button type="button"
                                             class="button sm border border-red-500 bg-red-50 hover:bg-red-100 text-red-600 form-trigger"
-                                            data-target="#deletePembagianForm-{{ $loop->iteration }}">
+                                            data-target="#deletePembagianForm-{{ $item->id }}">
                                             Hapus
                                         </button>
                                     </div>
