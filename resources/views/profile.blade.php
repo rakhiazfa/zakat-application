@@ -99,7 +99,7 @@
                         <div class="grid gap-5">
 
                             <div class="field">
-                                <label class="label">New Password</label>
+                                <label class="label">Old Password</label>
                                 <input type="password" class="control" name="old_password">
                                 @error('old_password')
                                     <p class="invalid-field">{{ $message }}</p>
