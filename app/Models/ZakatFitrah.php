@@ -18,6 +18,11 @@ class ZakatFitrah extends Model
     /**
      * @var array
      */
+    protected $hidden = ['created_at', 'updated_at', 'user_id'];
+
+    /**
+     * @var array
+     */
     protected $fillable = [
         'tanggal', 'nama_muzaki', 'alamat', 'jumlah_jiwa', 'jenis_barang', 'nominal_zakat_fitrah',
         'jumlah_beras', 'nominal_fidyah', 'total_uang', 'total_beras', 'keterangan', 'user_id',

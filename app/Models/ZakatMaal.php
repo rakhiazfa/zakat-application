@@ -18,6 +18,11 @@ class ZakatMaal extends Model
     /**
      * @var array
      */
+    protected $hidden = ['created_at', 'updated_at', 'user_id'];
+
+    /**
+     * @var array
+     */
     protected $fillable = [
         'tanggal', 'nama_muzaki', 'alamat', 'jenis_harta', 'nominal_zakat_maal',
         'nominal_infaq_shedekah', 'total', 'keterangan', 'user_id',
