@@ -79,7 +79,9 @@ class PembayaranController extends Controller
 
         ZakatFitrah::create($request->all());
 
-        ZakatMaal::create($request->all());
+        if($total > 0) {
+            ZakatMaal::create($request->all());
+        }
 
         return redirect()->route('pembayaran')->with('success', 'Pembayaran berhasil.');
     }

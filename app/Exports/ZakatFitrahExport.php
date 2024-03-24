@@ -2,38 +2,25 @@
 
 namespace App\Exports;
 
-use App\Models\ZakatFitrah;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+use App\Models\User;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class ZakatFitrahExport implements FromCollection, WithHeadings
+class ZakatFitrahExport implements WithMultipleSheets
 {
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function collection()
-    {
-        return ZakatFitrah::all();
-    }
+    use Exportable;
 
-    public function headings(): array
+    /**
+     * @return array
+     */
+    public function sheets(): array
     {
-        return [
-            'ID',
-            'Tanggal',
-            'Nama Muzaki',
-            'Alamat',
-            'Jumlah Jiwa',
-            'Jenis Barang',
-            'Jumlah Beras ( Kg )',
-            'Nominal Zakat Fitrah ( Rp. )',
-            'Nominal Fidyah ( Rp. )',
-            'Total Uang ( Rp. )',
-            'Total Beras ( Kg )',
-            'Keterangan',
-            'USER ID',
-            'Created At',
-            'Updated At',
-        ];
+        $users = User::role('Amil Zakat')->get();
+
+        foreach($users as $key => $user) {
+            $sheets[] = new ZakatFitrahSheet($user->id, 'RT ' . ($key + 1));
+        }
+
+        return $sheets;
     }
 }

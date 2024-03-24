@@ -2,35 +2,25 @@
 
 namespace App\Exports;
 
-use App\Models\ZakatMaal;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Concerns\WithHeadings;
+use App\Models\User;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class ZakatMaalExport implements FromCollection, WithHeadings
+class ZakatMaalExport implements WithMultipleSheets
 {
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function collection()
-    {
-        return ZakatMaal::all();
-    }
+    use Exportable;
 
-    public function headings(): array
+    /**
+     * @return array
+     */
+    public function sheets(): array
     {
-        return [
-            'ID',
-            'Tanggal',
-            'Nama Muzaki',
-            'Alamat',
-            'Jenis Harta',
-            'Nominal Zakat Maal ( Rp. )',
-            'Nominal Infaq / Shodaqoh ( Rp. )',
-            'Total Uang ( Rp. )',
-            'Keterangan',
-            'USER ID',
-            'Created At',
-            'Updated At',
-        ];
+        $users = User::role('Amil Zakat')->get();
+
+        foreach($users as $key => $user) {
+            $sheets[] = new ZakatMaalSheet($user->id, 'RT ' . ($key + 1));
+        }
+
+        return $sheets;
     }
 }

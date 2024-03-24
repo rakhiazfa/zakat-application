@@ -28,7 +28,7 @@
                         <div class="grid gap-7">
 
                             <div class="field">
-                                <label class="label">Email or Username</label>
+                                <label class="label">Username</label>
                                 <input type="text" class="control" name="email_or_username"
                                     value="{{ old('email_or_username') }}"
                                     placeholder="Enter your email or username . . .">
