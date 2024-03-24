@@ -4,7 +4,7 @@
 
         <section class="min-h-screen grid grid-cols-1 lg:grid-cols-[1fr,500px]">
 
-            <div class="bg-emerald-500 bg-gradient-to-br from-emerald-500 to-emerald-700"></div>
+            <div class="bg-blue-600 bg-gradient-to-br from-blue-600 to-blue-800"></div>
 
             <div class="min-h-screen grid place-items-center">
 

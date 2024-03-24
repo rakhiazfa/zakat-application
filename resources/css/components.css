@@ -130,7 +130,7 @@
     }
     .table thead th {
         @apply text-xs md:text-[0.8rem] 
-        text-gray-500 font-medium py-5;
+        text-gray-600 font-medium py-5;
     }
     .table th {
         @apply text-gray-600 font-medium;
@@ -144,27 +144,27 @@
     }
     .table .table-actions .uil,
     .table .table-actions .uis {
-        @apply text-[1.2rem] text-gray-500;
+        @apply text-[1.2rem] text-gray-600;
     }
     .table.table-bordered th,
     .table.table-bordered td {
-        @apply border border-gray-200;
+        @apply border border-gray-300;
     }
     .table.table-bordered-b th,
     .table.table-bordered-b td {
-        @apply border-b border-gray-100;
+        @apply border-b border-gray-200;
     }
     .table.table-sm th,
     .table.table-sm td {
-        @apply text-xs px-6 py-[0.875rem];
+        @apply text-xs px-6 py-[0.875rem] font-normal;
     }
     .table.table-xs th,
     .table.table-xs td {
-        @apply text-[0.7rem] px-3 py-[0.8rem];
+        @apply text-[0.7rem] px-3 py-[0.8rem] font-normal;
     }
     .table.table-xxs th,
     .table.table-xxs td {
-        @apply text-[0.575rem] px-3 py-[0.75rem];
+        @apply text-[0.575rem] px-2 py-[0.5rem] font-normal;
     }
 
 }

@@ -84,7 +84,7 @@
                         </tr>
                         <tr>
                             <th>KK</th>
-                            <th>Jiwa ( Orang )</th>
+                            <th>Jiwa ( ORG )</th>
                             <th>Beras ( KG )</th>
                             <th>Uang ( Rp. )</th>
                             <th>Jenis Barang</th>

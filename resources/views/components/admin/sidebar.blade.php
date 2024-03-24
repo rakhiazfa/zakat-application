@@ -1,9 +1,9 @@
 <aside class="sidebar">
     <div class="sidebar-header">
-        <h4 class="text-2xl text-emerald-500 text-center font-bold">
+        <h4 class="text-2xl text-blue-500 text-center font-bold">
             <div class="flex items-center gap-2 select-none">
                 <span>
-                    AMJH
+                    Merdekalio
                 </span>
             </div>
         </h4>
