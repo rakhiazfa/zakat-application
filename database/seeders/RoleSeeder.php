@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -16,5 +15,9 @@ class RoleSeeder extends Seeder
         Role::create(['name' => 'Super Admin']);
 
         Role::create(['name' => 'Amil Zakat']);
+
+        Role::create(['name' => 'Ketua RW']);
+
+        Role::create(['name' => 'Ketua RT']);
     }
 }

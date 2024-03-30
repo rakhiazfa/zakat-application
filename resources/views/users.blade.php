@@ -14,7 +14,7 @@
                             <div class="flex flex-col">
                                 <span class="text-sm font-medium">{{ $user->name }}</span>
                                 <span class="text-[0.55rem] sm:text-[0.7rem] text-gray-500 font-normal">
-                                    {{ $user->email }}
+                                    {{ $user->username }}
                                 </span>
                             </div>
                         </div>

@@ -23,13 +23,15 @@
 
             <li class="menu-title">Applications</li>
 
-            <li>
-                <a class="sidebar-link {{ request()->routeIs('pembayaran*') ? 'active' : '' }}"
-                    href="{{ route('pembayaran') }}">
-                    <i class="uil uil-credit-card"></i>
-                    <span> Pembayaran </span>
-                </a>
-            </li>
+            @role('Super Admin|Amil Zakat')
+                <li>
+                    <a class="sidebar-link {{ request()->routeIs('pembayaran*') ? 'active' : '' }}"
+                        href="{{ route('pembayaran') }}">
+                        <i class="uil uil-credit-card"></i>
+                        <span> Pembayaran </span>
+                    </a>
+                </li>
+            @endrole
 
             <li>
                 <a class="sidebar-link {{ request()->routeIs('zakat_fitrah*') ? 'active' : '' }}"

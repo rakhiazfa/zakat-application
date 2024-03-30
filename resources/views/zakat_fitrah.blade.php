@@ -5,9 +5,11 @@
         <div class="flex justify-between items-center gap-10">
             <h1 class="title">Zakat Fitrah</h1>
             <div class="flex items-center gap-5">
-                <a class="button bg-blue-500 hover:bg-blue-600 text-white mb-5" href="{{ route('zakat_fitrah.create') }}">
-                    Tambah Data
-                </a>
+                @role('Super Admin|Amil Zakat')
+                    <a class="button bg-blue-500 hover:bg-blue-600 text-white mb-5" href="{{ route('zakat_fitrah.create') }}">
+                        Tambah Data
+                    </a>
+                @endrole
                 <a class="button bg-emerald-500 hover:bg-emerald-600 text-white mb-5"
                     href="{{ route('zakat_fitrah.export') }}">
                     Export
