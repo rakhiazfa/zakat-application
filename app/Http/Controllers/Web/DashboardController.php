@@ -25,9 +25,7 @@ class DashboardController extends Controller
 
         // 
 
-        $amilZakat = User::whereHas('roles', function ($query) {
-            $query->where('name', '!=', 'Super Admin');
-        })->with('roles')->get();
+        $amilZakat = User::role('Amil Zakat')->get();
 
         // 
 
