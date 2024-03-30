@@ -34,9 +34,7 @@ class ZakatMaalController extends Controller
      */
     public function create()
     {
-        $users = User::whereHas('roles', function ($query) {
-            $query->where('name', '!=', 'Super Admin');
-        })->with('roles')->get();
+        $users = User::role('Amil Zakat')->get();
 
         return view('zakat_maal.create')->with('users', $users);
     }

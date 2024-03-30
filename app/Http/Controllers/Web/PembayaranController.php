@@ -17,9 +17,7 @@ class PembayaranController extends Controller
         $zakatPerJiwaUang = ZakatPerJiwa::where('key', 'uang')->first()->nominal ?? 0;
         $zakatPerJiwaBeras = ZakatPerJiwa::where('key', 'beras')->first()->nominal ?? 0;
 
-        $users = User::whereHas('roles', function ($query) {
-            $query->where('name', '!=', 'Super Admin');
-        })->with('roles')->get();
+        $users = User::role('Amil Zakat')->get();
 
         return view('pembayaran')->with([
             'zakatPerJiwaUang' => $zakatPerJiwaUang,
